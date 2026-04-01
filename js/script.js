@@ -92,6 +92,7 @@ const data = [
     year: 2020,
     image: "https://placehold.co/400x300/4169e1/white?text=Tau+Ethereals"
   }
+
 ];
 
 
