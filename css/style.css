@@ -1,12 +1,76 @@
 /* Styles du projet */
 
+/* Sélecteur universel * : s'applique à TOUS les éléments de la page
+   - margin: 0; : supprime les marges par défaut du navigateur
+   - padding: 0; : supprime les espaces internes par défaut
+   - box-sizing: border-box; : inclut la bordure dans la largeur/hauteur (plus facile à calculer) */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Style du corps principal de la page */
 body {
+  /* Font-family : police d'écriture (system-ui est la police système, sans-serif est la sauvegarde) */
   font-family: system-ui, sans-serif;
+  /* Ajoute 2rem (32px par défaut) d'espacement intérieur tout autour du contenu */
   padding: 2rem;
+}
+
+/* Style de la liste #list (l'id doit correspondre à l'élément HTML avec id="list") */
+#list {
+  /* display: grid; : crée une grille CSS (affichage en colonnes) */
+  display: grid;
+  /* grid-template-columns : crée des colonnes avec auto-fill (remplit automatiquement)
+     minmax(280px, 1fr) : chaque colonne fait au minimum 280px et au maximum 1 fraction */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* gap: crée un espacement entre chaque élément (1.5rem = 24px) */
+  gap: 1.5rem;
+  /* list-style: none; : supprime les puces de la liste */
+  list-style: none;
+  /* padding: 0; : supprime l'espacement interne */
+  padding: 0;
+}
+
+/* Style de chaque carte (l'élément avec la classe card) */
+.card {
+  /* border: 1px solid #ddd; : ajoute une bordure fine grise autour de la carte */
+  border: 1px solid #ddd;
+  /* border-radius: 8px; : arrondit les coins de la carte */
+  border-radius: 8px;
+  /* overflow: hidden; : masque les contenus qui dépassent la carte (important pour voir les coins arrondis) */
+  overflow: hidden;
+  /* transition: transform 0.2s; : ajoute une animation fluide lors des changements (utile pour le hover) */
+  transition: transform 0.2s;
+}
+
+/* Effet au survol (.card:hover = quand on passe la souris sur une carte) */
+.card:hover {
+  /* transform: translateY(-4px); : monte légèrement la carte de 4px vers le haut */
+  transform: translateY(-4px);
+  /* Ajoute une ombre douce autour de la carte pour créer un effet 3D de profondeur */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  /* width: 100%; : l'image prend 100% de la largeur de son conteneur (la carte) */
+  width: 100%;
+  /* height: 200px; : fixe une hauteur de 200px pour toutes les images (uniformité) */
+  height: 200px;
+  /* object-fit: cover; : remplit l'espace en gardant les proportions, coupe si nécessaire (au lieu de déformer)
+
+     AUTRES VALEURS POSSIBLES :
+     - contain    : affiche l'image ENTIÈRE dedans, peut avoir des espaces vides (barres noires)
+     - fill       : remplit tout l'espace MAIS peut déformer l'image (étirement)
+     - scale-down : montre la version la plus petite (contient OU taille naturelle)
+     - none       : affiche l'image à sa taille d'origine (peut sortir de la zone)
+     - cover      : ACTUEL - remplit l'espace, coupe les bords (recommandé pour galeries)
+  */
+  object-fit: cover;
+}
+
+.card-body {
+  /* padding: 1rem; : ajoute 16px d'espacement interne pour le texte à l'intérieur de la carte */
+  padding: 1rem;
 }
