@@ -1,76 +1,337 @@
-/* Styles du projet */
+/* =============================================
+   VARIABLES CSS — couleurs et espacements
+   ============================================= */
+:root {
+  --color-primary: #0078d4;
+  --color-primary-dark: #005fa3;
+  --color-danger: #e74c3c;
+  --color-danger-dark: #c0392b;
+  --color-bg: #f4f6f9;
+  --color-card-bg: #ffffff;
+  --color-border: #ddd;
+  --color-text: #2c3e50;
+  --color-text-light: #666;
+  --color-header-bg: #1a1a2e;
+  --color-header-text: #ffffff;
+  --color-footer-bg: #1a1a2e;
+  --color-footer-text: #aaaaaa;
+  --color-rating-bg: #f39c12;
+  --color-rating-text: #ffffff;
+  --color-feedback-bg: #d4edda;
+  --color-feedback-text: #155724;
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-/* Sélecteur universel * : s'applique à TOUS les éléments de la page
-   - margin: 0; : supprime les marges par défaut du navigateur
-   - padding: 0; : supprime les espaces internes par défaut
-   - box-sizing: border-box; : inclut la bordure dans la largeur/hauteur (plus facile à calculer) */
+/* =============================================
+   RESET UNIVERSEL
+   ============================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Style du corps principal de la page */
+/* =============================================
+   BODY
+   ============================================= */
 body {
-  /* Font-family : police d'écriture (system-ui est la police système, sans-serif est la sauvegarde) */
-  font-family: system-ui, sans-serif;
-  /* Ajoute 2rem (32px par défaut) d'espacement intérieur tout autour du contenu */
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+header {
+  background-color: var(--color-header-bg);
+  color: var(--color-header-text);
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* =============================================
+   NAV — compteur de résultats
+   ============================================= */
+nav {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 0.5rem 2rem;
+  font-size: 0.9rem;
+}
+
+/* =============================================
+   MAIN
+   ============================================= */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
 }
 
-/* Style de la liste #list (l'id doit correspondre à l'élément HTML avec id="list") */
+/* =============================================
+   FORMULAIRE D'AJOUT
+   ============================================= */
+form#form-add {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+form#form-add h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--color-text);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+form#form-add button[type="submit"] {
+  padding: 10px 20px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+form#form-add button[type="submit"]:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* =============================================
+   BARRE D'OUTILS (recherche + filtre + tri)
+   ============================================= */
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+#search {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+#search:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+#filter-category,
+#sort-select {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+#filter-category:focus,
+#sort-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* =============================================
+   FEEDBACK MESSAGE
+   ============================================= */
+.feedback {
+  background-color: var(--color-feedback-bg);
+  color: var(--color-feedback-text);
+  border: 1px solid #c3e6cb;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.feedback.hidden {
+  display: none;
+}
+
+/* =============================================
+   GRILLE DES CARTES
+   ============================================= */
 #list {
-  /* display: grid; : crée une grille CSS (affichage en colonnes) */
   display: grid;
-  /* grid-template-columns : crée des colonnes avec auto-fill (remplit automatiquement)
-     minmax(280px, 1fr) : chaque colonne fait au minimum 280px et au maximum 1 fraction */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  /* gap: crée un espacement entre chaque élément (1.5rem = 24px) */
   gap: 1.5rem;
-  /* list-style: none; : supprime les puces de la liste */
   list-style: none;
-  /* padding: 0; : supprime l'espacement interne */
   padding: 0;
 }
 
-/* Style de chaque carte (l'élément avec la classe card) */
+/* =============================================
+   CARTE INDIVIDUELLE
+   ============================================= */
 .card {
-  /* border: 1px solid #ddd; : ajoute une bordure fine grise autour de la carte */
-  border: 1px solid #ddd;
-  /* border-radius: 8px; : arrondit les coins de la carte */
-  border-radius: 8px;
-  /* overflow: hidden; : masque les contenus qui dépassent la carte (important pour voir les coins arrondis) */
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
   overflow: hidden;
-  /* transition: transform 0.2s; : ajoute une animation fluide lors des changements (utile pour le hover) */
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Effet au survol (.card:hover = quand on passe la souris sur une carte) */
 .card:hover {
-  /* transform: translateY(-4px); : monte légèrement la carte de 4px vers le haut */
   transform: translateY(-4px);
-  /* Ajoute une ombre douce autour de la carte pour créer un effet 3D de profondeur */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .card img {
-  /* width: 100%; : l'image prend 100% de la largeur de son conteneur (la carte) */
   width: 100%;
-  /* height: 200px; : fixe une hauteur de 200px pour toutes les images (uniformité) */
-  height: 200px;
-  /* object-fit: cover; : remplit l'espace en gardant les proportions, coupe si nécessaire (au lieu de déformer)
-
-     AUTRES VALEURS POSSIBLES :
-     - contain    : affiche l'image ENTIÈRE dedans, peut avoir des espaces vides (barres noires)
-     - fill       : remplit tout l'espace MAIS peut déformer l'image (étirement)
-     - scale-down : montre la version la plus petite (contient OU taille naturelle)
-     - none       : affiche l'image à sa taille d'origine (peut sortir de la zone)
-     - cover      : ACTUEL - remplit l'espace, coupe les bords (recommandé pour galeries)
-  */
+  height: 180px;
   object-fit: cover;
 }
 
 .card-body {
-  /* padding: 1rem; : ajoute 16px d'espacement interne pour le texte à l'intérieur de la carte */
   padding: 1rem;
+}
+
+.card-body h2 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.card-body p {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-bottom: 0.5rem;
+}
+
+/* Badge note */
+.rating {
+  display: inline-block;
+  background-color: var(--color-rating-bg);
+  color: var(--color-rating-text);
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Bouton supprimer */
+.btn-delete {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: var(--color-danger);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: var(--color-danger-dark);
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer {
+  background-color: var(--color-footer-bg);
+  color: var(--color-footer-text);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  margin-top: 3rem;
+}
+
+/* =============================================
+   RESPONSIVE — tablette (max 768px)
+   ============================================= */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #search,
+  #filter-category,
+  #sort-select {
+    width: 100%;
+  }
+
+  #list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — mobile (max 480px)
+   ============================================= */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  #list {
+    grid-template-columns: 1fr;
+  }
+
+  form#form-add {
+    padding: 1rem;
+  }
+
+  .card img {
+    height: 140px;
+  }
 }

@@ -1,7 +1,9 @@
 "use strict";
 
-// Tableau de données — à générer avec Copilot / une IA
-const data = [
+// =============================================
+// DONNÉES — tableau d'objets jeux vidéo
+// =============================================
+let data = [
   {
     id: 35,
     name: "The Witcher 3",
@@ -94,33 +96,182 @@ const data = [
   }
 ];
 
+// =============================================
+// ÉLÉMENTS DU DOM
+// =============================================
+const divList         = document.getElementById("list");
+const inputSearch     = document.getElementById("search");
+const selectCategory  = document.getElementById("filter-category");
+const selectSort      = document.getElementById("sort-select");
+const formAdd         = document.getElementById("form-add");
+const inputName       = document.getElementById("input-name");
+const inputCategory   = document.getElementById("input-category");
+const inputPlatform   = document.getElementById("input-platform");
+const inputRating     = document.getElementById("input-rating");
+const pFeedback       = document.getElementById("feedback");
+const spanNavCount    = document.getElementById("nav-count");
+
+// =============================================
+// AFFICHER UN MESSAGE DE FEEDBACK
+// =============================================
 /**
- * Affiche les jeux dans la page
+ * Affiche un message de confirmation pendant 3 secondes
+ * @param {string} message - Le texte à afficher
+ */
+function showFeedback(message) {
+  pFeedback.textContent = message;
+  pFeedback.classList.remove("hidden");
+
+  // Cache le message après 3 secondes
+  setTimeout(function () {
+    pFeedback.classList.add("hidden");
+  }, 3000);
+}
+
+// =============================================
+// REFRESH — filtre + tri + affichage
+// =============================================
+/**
+ * Rafraîchit l'affichage en combinant filtre, tri et rendu DOM
+ */
+function refresh() {
+  const query    = inputSearch.value.toLowerCase();
+  const category = selectCategory.value;
+  const sortVal  = selectSort.value;
+
+  // 1. Filtrer par recherche (nom)
+  let result = data.filter(function (jeu) {
+    return jeu.name.toLowerCase().includes(query);
+  });
+
+  // 2. Filtrer par catégorie (bonus +1 pt)
+  if (category !== "") {
+    result = result.filter(function (jeu) {
+      return jeu.category === category;
+    });
+  }
+
+  // 3. Trier selon le critère choisi dans le select
+  result = result.sort(function (a, b) {
+    switch (sortVal) {
+      case "rating-asc":  return a.rating - b.rating;
+      case "rating-desc": return b.rating - a.rating;
+      case "name-asc":    return a.name.localeCompare(b.name);
+      case "name-desc":   return b.name.localeCompare(a.name);
+      case "year-asc":    return a.year - b.year;
+      case "year-desc":   return b.year - a.year;
+      default:            return 0;
+    }
+  });
+
+  // 4. Mettre à jour le compteur dans la nav
+  spanNavCount.textContent = result.length + " jeu(x) affiché(s)";
+
+  // 5. Afficher les cartes
+  afficherJeux(result);
+}
+
+// =============================================
+// AFFICHER LES JEUX
+// =============================================
+/**
+ * Génère et injecte les cartes HTML dans le DOM
  * @param {Array} tabJeux - Tableau d'objets jeu à afficher
  */
 function afficherJeux(tabJeux) {
-  // Récupère la liste #list
-  const ulList = document.getElementById("list");
-  // Variable temporaire pour construire la liste
   let html = "";
 
-// Parcours le tableau et créer un li par jeu
-  tabJeux.forEach(jeu => {
+  tabJeux.forEach(function (jeu) {
     html += `
-    <article class="card" data-id="${jeu.id}">
-      <img src="${jeu.image}" alt="${jeu.name}">
-      <div class="card-body">
-        <h2>${jeu.name}</h2>
-        <p>${jeu.category} — ${jeu.year}</p>
-        <span class="rating">${jeu.rating}</span>
-      </div>
-    </article>
-  `;
+      <article class="card" data-id="${jeu.id}">
+        <img src="${jeu.image}" alt="${jeu.name}">
+        <div class="card-body">
+          <h2>${jeu.name}</h2>
+          <p>${jeu.category} — ${jeu.platform} — ${jeu.year}</p>
+          <span class="rating">⭐ ${jeu.rating}</span>
+          <button class="btn-delete">🗑 Supprimer</button>
+        </div>
+      </article>
+    `;
   });
 
-  // Ajoute la liste complète dans le DOM
-  ulList.innerHTML = html;
+  divList.innerHTML = html;
 }
 
-// Appel au chargement de la page
-afficherJeux(data);
+// =============================================
+// ÉVÉNEMENTS
+// =============================================
+
+// Recherche en temps réel : à chaque frappe
+inputSearch.addEventListener("input", refresh);
+
+// Filtre par catégorie
+selectCategory.addEventListener("change", refresh);
+
+// Tri par critère
+selectSort.addEventListener("change", refresh);
+
+// Formulaire : ajouter un jeu
+formAdd.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  // Validation de la note
+  const note = Number(inputRating.value);
+  if (!note || note < 1 || note > 10) {
+    alert("La note doit être comprise entre 1 et 10.");
+    return;
+  }
+
+  // Créer le nouvel objet jeu
+  const nouveauJeu = {
+    id:       Date.now(),
+    name:     inputName.value.trim(),
+    category: inputCategory.value,
+    platform: inputPlatform.value,
+    rating:   note,
+    year:     new Date().getFullYear(),
+    image:    "https://placehold.co/400x300/7f8c8d/white?text=" + encodeURIComponent(inputName.value.trim())
+  };
+
+  // Ajouter au tableau de données
+  data.push(nouveauJeu);
+
+  // Rafraîchir l'affichage
+  refresh();
+
+  // Réinitialiser le formulaire
+  formAdd.reset();
+
+  // Afficher un message de confirmation
+  showFeedback("✅ \"" + nouveauJeu.name + "\" a été ajouté avec succès !");
+});
+
+// Suppression : délégation d'événement sur #list
+divList.addEventListener("click", function (event) {
+  // Vérifier si le clic est sur un bouton supprimer
+  const btnDelete = event.target.closest(".btn-delete");
+  if (!btnDelete) return;
+
+  // Récupérer l'id depuis l'article parent
+  const card = btnDelete.closest(".card");
+  const id   = Number(card.dataset.id);
+
+  // Trouver le nom du jeu pour le message de confirmation
+  const jeu = data.find(function (j) { return j.id === id; });
+
+  if (!confirm("Supprimer \"" + jeu.name + "\" ?")) return;
+
+  // Supprimer du tableau avec filter
+  data = data.filter(function (j) { return j.id !== id; });
+
+  // Rafraîchir l'affichage
+  refresh();
+
+  // Feedback
+  showFeedback("🗑 \"" + jeu.name + "\" a été supprimé.");
+});
+
+// =============================================
+// INITIALISATION — affichage au chargement
+// =============================================
+refresh();
