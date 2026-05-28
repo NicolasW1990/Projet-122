@@ -50,7 +50,7 @@ pour trier mes jeux par note et plateforme.
 
 ## Lien GitHub Pages
 
-https://mon-pseudo.github.io/esig-122-jeux-video/
+
 
 ## Fonctionnalités
 

@@ -1,277 +1,205 @@
 "use strict";
 
-// =============================================
-// DONNÉES — tableau d'objets jeux vidéo
-// =============================================
+// Tableau de données — Armées de l'Impérium (Warhammer 40 000)
 let data = [
   {
-    id: 35,
-    name: "The Witcher 3",
-    category: "RPG",
-    platform: "PC",
-    rating: 9.5,
-    year: 2015,
-    image: "https://placehold.co/400x300/4a90d9/white?text=The+Witcher+3"
+    id: 1,
+    name: "Ultramarines",
+    category: "Space Marines",
+    puissance: 9.2,
+    fondation: 1987,
+    image: "Image/space_wolf.jpg"
   },
   {
-    id: 36,
-    name: "Call of Duty Black Ops",
-    category: "FPS",
-    platform: "Xbox 360",
-    rating: 8.7,
-    year: 2010,
-    image: "https://placehold.co/400x300/e74c3c/white?text=Call+of+Duty+Black+Ops"
+    id: 2,
+    name: "Imperial Fists",
+    category: "Space Marines",
+    puissance: 8.9,
+    fondation: 1987,
+    image: "Image/Imperial-Fists.jpg"
   },
   {
-    id: 37,
-    name: "The Legend of Zelda Breath of the Wild",
-    category: "Aventure",
-    platform: "Nintendo Switch",
-    rating: 9.2,
-    year: 2017,
-    image: "https://placehold.co/400x300/27ae60/white?text=Zelda+Breath+of+the+Wild"
+    id: 3,
+    name: "Blood Angels",
+    category: "Space Marines",
+    puissance: 9.0,
+    fondation: 1990,
+    image: "Image/Blood-Angels.jpg"
   },
   {
-    id: 38,
-    name: "Starcraft II",
-    category: "Stratégie",
-    platform: "PC",
-    rating: 8.5,
-    year: 2010,
-    image: "https://placehold.co/400x300/f39c12/white?text=Starcraft+II"
+    id: 4,
+    name: "Space Wolves",
+    category: "Space Marines",
+    puissance: 8.7,
+    fondation: 1991,
+    image: "Image/space_wolf.jpg"
   },
   {
-    id: 39,
-    name: "Elden Ring",
-    category: "RPG",
-    platform: "PS5",
-    rating: 9.0,
-    year: 2022,
-    image: "https://placehold.co/400x300/4a90d9/white?text=Elden+Ring"
+    id: 5,
+    name: "Cadiens",
+    category: "Garde Impériale",
+    puissance: 7.8,
+    fondation: 1993,
+    image: "Image/Cadia.jpg"
   },
   {
-    id: 40,
-    name: "Counter Strike 2",
-    category: "FPS",
-    platform: "PC",
-    rating: 8.9,
-    year: 2023,
-    image: "https://placehold.co/400x300/e74c3c/white?text=Counter+Strike+2"
+    id: 6,
+    name: "Catachans",
+    category: "Garde Impériale",
+    puissance: 7.5,
+    fondation: 1993,
+    image: "Image/catachan.jpg"
   },
   {
-    id: 41,
-    name: "Uncharted 4",
-    category: "Aventure",
-    platform: "PS4",
-    rating: 8.8,
-    year: 2016,
-    image: "https://placehold.co/400x300/27ae60/white?text=Uncharted+4"
+    id: 7,
+    name: "Adepta Sororitas",
+    category: "Adepta Sororitas",
+    puissance: 8.5,
+    fondation: 1997,
+    image: "Image/adeptas_sororitas.jpg"
   },
   {
-    id: 42,
-    name: "Civilization VI",
-    category: "Stratégie",
-    platform: "PC",
-    rating: 8.4,
-    year: 2016,
-    image: "https://placehold.co/400x300/f39c12/white?text=Civilization+VI"
+    id: 8,
+    name: "Adeptus Custodes",
+    category: "Adeptus Custodes",
+    puissance: 9.5,
+    fondation: 2017,
+    image:"Image/Custodes.jpg",
   },
   {
-    id: 43,
-    name: "Dark Souls III",
-    category: "RPG",
-    platform: "PS4",
-    rating: 8.6,
-    year: 2016,
-    image: "https://placehold.co/400x300/4a90d9/white?text=Dark+Souls+III"
+    id: 9,
+    name: "Skitarii",
+    category: "Adeptus Mechanicus",
+    puissance: 8.3,
+    fondation: 2015,
+    image: "Image/Skitariiwebp.webp"
   },
   {
-    id: 44,
-    name: "Valorant",
-    category: "FPS",
-    platform: "PC",
-    rating: 8.3,
-    year: 2020,
-    image: "https://placehold.co/400x300/e74c3c/white?text=Valorant"
+    id: 10,
+    name: "Chevaliers Impériaux",
+    category: "Chevaliers Impériaux",
+    puissance: 9.3,
+    fondation: 2014,
+    image: "Image/Imperial-Knights.jpg"
+  },
+  {
+    id: 11,
+    name: "Dark Angels",
+    category: "Space Marines",
+    puissance: 8.8,
+    fondation: 1988,
+    image: "Image/Dark-Angel.webp"
+  },
+  {
+    id: 12,
+    name: "Grey Knights",
+    category: "Space Marines",
+    puissance: 9.1,
+    fondation: 1992,
+    image: "Image/grey knight.jpg"
   }
 ];
 
-// =============================================
-// ÉLÉMENTS DU DOM
-// =============================================
-const divList         = document.getElementById("list");
-const inputSearch     = document.getElementById("search");
-const selectCategory  = document.getElementById("filter-category");
-const selectSort      = document.getElementById("sort-select");
-const formAdd         = document.getElementById("form-add");
-const inputName       = document.getElementById("input-name");
-const inputCategory   = document.getElementById("input-category");
-const inputPlatform   = document.getElementById("input-platform");
-const inputRating     = document.getElementById("input-rating");
-const pFeedback       = document.getElementById("feedback");
-const spanNavCount    = document.getElementById("nav-count");
+// Éléments du DOM
+const btnSort = document.getElementById("btn-sort");
+const searchInput = document.getElementById("search");
+const form = document.getElementById("form-add");
+const inputName = document.getElementById("input-name");
+const inputCategory = document.getElementById("input-category");
+const inputRating = document.getElementById("input-rating");
 
-// =============================================
-// AFFICHER UN MESSAGE DE FEEDBACK
-// =============================================
+// Sens du tri : false = DESC (puissance élevée en premier)
+let sortAsc = false;
+
 /**
- * Affiche un message de confirmation pendant 3 secondes
- * @param {string} message - Le texte à afficher
- */
-function showFeedback(message) {
-  pFeedback.textContent = message;
-  pFeedback.classList.remove("hidden");
-
-  // Cache le message après 3 secondes
-  setTimeout(function () {
-    pFeedback.classList.add("hidden");
-  }, 3000);
-}
-
-// =============================================
-// REFRESH — filtre + tri + affichage
-// =============================================
-/**
- * Rafraîchit l'affichage en combinant filtre, tri et rendu DOM
+ * Rafraîchit l'affichage en combinant filtre + tri
  */
 function refresh() {
-  const query    = inputSearch.value.toLowerCase();
-  const category = selectCategory.value;
-  const sortVal  = selectSort.value;
+  const query = searchInput.value.toLowerCase();
 
-  // 1. Filtrer par recherche (nom)
-  let result = data.filter(function (jeu) {
-    return jeu.name.toLowerCase().includes(query);
-  });
+  // 1. Filtrer selon le champ de recherche
+  let result = data.filter(armee =>
+      armee.name.toLowerCase().includes(query)
+  );
 
-  // 2. Filtrer par catégorie (bonus +1 pt)
-  if (category !== "") {
-    result = result.filter(function (jeu) {
-      return jeu.category === category;
-    });
-  }
+  // 2. Trier selon l'état du bouton
+  result = [...result].sort((a, b) =>
+      sortAsc ? a.puissance - b.puissance : b.puissance - a.puissance
+  );
 
-  // 3. Trier selon le critère choisi dans le select
-  result = result.sort(function (a, b) {
-    switch (sortVal) {
-      case "rating-asc":  return a.rating - b.rating;
-      case "rating-desc": return b.rating - a.rating;
-      case "name-asc":    return a.name.localeCompare(b.name);
-      case "name-desc":   return b.name.localeCompare(a.name);
-      case "year-asc":    return a.year - b.year;
-      case "year-desc":   return b.year - a.year;
-      default:            return 0;
-    }
-  });
-
-  // 4. Mettre à jour le compteur dans la nav
-  spanNavCount.textContent = result.length + " jeu(x) affiché(s)";
-
-  // 5. Afficher les cartes
-  afficherJeux(result);
+  // 3. Afficher
+  afficherArmees(result);
 }
 
-// =============================================
-// AFFICHER LES JEUX
-// =============================================
-/**
- * Génère et injecte les cartes HTML dans le DOM
- * @param {Array} tabJeux - Tableau d'objets jeu à afficher
- */
-function afficherJeux(tabJeux) {
-  let html = "";
+// Tri : inverser l'état, mettre à jour le bouton, rafraîchir
+btnSort.addEventListener("click", function () {
+  sortAsc = !sortAsc;
+  btnSort.textContent = sortAsc
+      ? "Trier par puissance ↑ (ASC)"
+      : "Trier par puissance ↓ (DESC)";
+  refresh();
+});
 
-  tabJeux.forEach(function (jeu) {
-    html += `
-      <article class="card" data-id="${jeu.id}">
-        <img src="${jeu.image}" alt="${jeu.name}">
-        <div class="card-body">
-          <h2>${jeu.name}</h2>
-          <p>${jeu.category} — ${jeu.platform} — ${jeu.year}</p>
-          <span class="rating">⭐ ${jeu.rating}</span>
-          <button class="btn-delete">🗑 Supprimer</button>
-        </div>
-      </article>
-    `;
-  });
+// Recherche : à chaque frappe, rafraîchir
+searchInput.addEventListener("input", refresh);
 
-  divList.innerHTML = html;
-}
-
-// =============================================
-// ÉVÉNEMENTS
-// =============================================
-
-// Recherche en temps réel : à chaque frappe
-inputSearch.addEventListener("input", refresh);
-
-// Filtre par catégorie
-selectCategory.addEventListener("change", refresh);
-
-// Tri par critère
-selectSort.addEventListener("change", refresh);
-
-// Formulaire : ajouter un jeu
-formAdd.addEventListener("submit", function (event) {
+// Formulaire : ajouter une armée
+form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // Validation de la note
-  const note = Number(inputRating.value);
-  if (!note || note < 1 || note > 10) {
-    alert("La note doit être comprise entre 1 et 10.");
-    return;
-  }
-
-  // Créer le nouvel objet jeu
-  const nouveauJeu = {
-    id:       Date.now(),
-    name:     inputName.value.trim(),
+  const nouvelleArmee = {
+    id: Date.now(),
+    name: inputName.value.trim(),
     category: inputCategory.value,
-    platform: inputPlatform.value,
-    rating:   note,
-    year:     new Date().getFullYear(),
-    image:    "https://placehold.co/400x300/7f8c8d/white?text=" + encodeURIComponent(inputName.value.trim())
+    puissance: Number(inputRating.value),
+    fondation: new Date().getFullYear(),
+    image: "https://placehold.co/400x300/3a2a0a/white?text="
+        + encodeURIComponent(inputName.value.trim())
   };
 
-  // Ajouter au tableau de données
-  data.push(nouveauJeu);
-
-  // Rafraîchir l'affichage
+  data.push(nouvelleArmee);
   refresh();
-
-  // Réinitialiser le formulaire
-  formAdd.reset();
-
-  // Afficher un message de confirmation
-  showFeedback("✅ \"" + nouveauJeu.name + "\" a été ajouté avec succès !");
+  form.reset();
 });
 
-// Suppression : délégation d'événement sur #list
-divList.addEventListener("click", function (event) {
-  // Vérifier si le clic est sur un bouton supprimer
-  const btnDelete = event.target.closest(".btn-delete");
-  if (!btnDelete) return;
+// Suppression : délégation sur le conteneur #list
+document.getElementById("list").addEventListener("click", function (event) {
+  const btn = event.target.closest(".btn-delete");
+  if (!btn) return;
 
-  // Récupérer l'id depuis l'article parent
-  const card = btnDelete.closest(".card");
-  const id   = Number(card.dataset.id);
+  const card = btn.closest(".card");
+  const id = Number(card.dataset.id);
 
-  // Trouver le nom du jeu pour le message de confirmation
-  const jeu = data.find(function (j) { return j.id === id; });
+  if (!confirm("Retirer cette armée du registre impérial ?")) return;
 
-  if (!confirm("Supprimer \"" + jeu.name + "\" ?")) return;
-
-  // Supprimer du tableau avec filter
-  data = data.filter(function (j) { return j.id !== id; });
-
-  // Rafraîchir l'affichage
+  data = data.filter(armee => armee.id !== id);
   refresh();
-
-  // Feedback
-  showFeedback("🗑 \"" + jeu.name + "\" a été supprimé.");
 });
 
-// =============================================
-// INITIALISATION — affichage au chargement
-// =============================================
+/**
+ * Affiche les armées dans la page
+ * @param {Array} tabArmees - Tableau d'objets armée à afficher
+ */
+function afficherArmees(tabArmees) {
+  const ulList = document.getElementById("list");
+  let html = "";
+
+  tabArmees.forEach(armee => {
+    html += `
+    <article class="card" data-id="${armee.id}">
+      <img src="${armee.image}" alt="${armee.name}">
+      <div class="card-body">
+        <h2>${armee.name}</h2>
+        <p>${armee.category} — ${armee.fondation}</p>
+        <span class="rating">${armee.puissance}</span>
+        <button class="btn btn-danger btn-delete">Retirer</button>
+      </div>
+    </article>
+  `;
+  });
+
+  ulList.innerHTML = html;
+}
+
+// Affichage initial
 refresh();

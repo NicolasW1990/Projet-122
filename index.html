@@ -3,87 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mon projet 122</title>
+  <title>Armées de l'Impérium — Warhammer 40 000</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
 <header>
-  <h1>🎮 Les Jeux-Vidéos</h1>
+  <h1>⚙️ Armées de l'Impérium</h1>
+  <p class="subtitle">Warhammer 40 000 — Pour l'Empereur !</p>
 </header>
-
-<nav>
-  <span id="nav-count">0 jeu(x) affiché(s)</span>
-</nav>
 
 <main>
   <form id="form-add">
-    <h2>Ajouter un jeu</h2>
+    <h2>Ajouter une armée</h2>
 
     <div class="form-group">
       <label for="input-name">Nom</label>
-      <input type="text" id="input-name" placeholder="Ex : The Witcher 3" required>
+      <input type="text" id="input-name" placeholder="Ex : Ultramarines" required>
     </div>
 
     <div class="form-group">
-      <label for="input-category">Catégorie</label>
+      <label for="input-category">Faction</label>
       <select id="input-category">
-        <option value="Action">Action</option>
-        <option value="Aventure">Aventure</option>
-        <option value="FPS">FPS</option>
-        <option value="RPG">RPG</option>
-        <option value="Stratégie">Stratégie</option>
+        <option value="Space Marines">Space Marines</option>
+        <option value="Garde Impériale">Garde Impériale</option>
+        <option value="Adeptus Mechanicus">Adeptus Mechanicus</option>
+        <option value="Adepta Sororitas">Adepta Sororitas</option>
+        <option value="Chevaliers Impériaux">Chevaliers Impériaux</option>
+        <option value="Adeptus Custodes">Adeptus Custodes</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="input-platform">Plateforme</label>
-      <select id="input-platform">
-        <option value="PC">PC</option>
-        <option value="PS5">PS5</option>
-        <option value="PS4">PS4</option>
-        <option value="Xbox">Xbox</option>
-        <option value="Nintendo Switch">Nintendo Switch</option>
-      </select>
+      <label for="input-rating">Puissance de guerre (1–10)</label>
+      <input type="number" id="input-rating" min="1" max="10" placeholder="8">
     </div>
 
-    <div class="form-group">
-      <label for="input-rating">Note (1–10)</label>
-      <input type="number" id="input-rating" min="1" max="10" placeholder="8" required>
-    </div>
-
-    <button type="submit">➕ Ajouter</button>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
   </form>
 
-  <!-- Barre d'outils : recherche, filtre catégorie, tri -->
   <div class="toolbar">
-    <input type="text" id="search" placeholder="🔍 Rechercher un jeu...">
-
-    <select id="filter-category">
-      <option value="">Toutes les catégories</option>
-      <option value="Action">Action</option>
-      <option value="Aventure">Aventure</option>
-      <option value="FPS">FPS</option>
-      <option value="RPG">RPG</option>
-      <option value="Stratégie">Stratégie</option>
-    </select>
-
-    <select id="sort-select">
-      <option value="rating-desc">Note ↓ (DESC)</option>
-      <option value="rating-asc">Note ↑ (ASC)</option>
-      <option value="name-asc">Nom A → Z</option>
-      <option value="name-desc">Nom Z → A</option>
-      <option value="year-desc">Année ↓</option>
-      <option value="year-asc">Année ↑</option>
-    </select>
+    <input type="text" id="search" placeholder="Rechercher une armée...">
+    <button id="btn-sort" class="btn btn-primary">Trier par puissance ↓ (DESC)</button>
   </div>
 
-  <!-- Message de feedback -->
-  <p id="feedback" class="feedback hidden"></p>
-
-  <!-- Liste des jeux -->
-  <div id="list"></div>
+  <ul id="list"></ul>
 </main>
+
+
+
 
 <footer>
   <p>Projet C122 — JavaScript — ESIG 2025-2026</p>

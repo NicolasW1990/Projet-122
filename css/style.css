@@ -23,74 +23,224 @@
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* =============================================
-   RESET UNIVERSEL
-   ============================================= */
+/*/* Styles du projet — Armées de l'Impérium (Warhammer 40 000) */
+
+/* Import de la police gothique depuis Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Sélecteur universel : supprime marges/paddings par défaut, active box-sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =============================================
-   BODY
-   ============================================= */
+/* Corps de la page — thème sombre impérial */
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  font-family: 'Crimson Text', Georgia, serif;
+  background-color: #0d0d0d;
+  color: #c8b882;
+  padding: 2rem;
+  /* Texture de fond subtile */
+  background-image:
+          radial-gradient(ellipse at top, #1a1208 0%, #0d0d0d 60%);
+  min-height: 100vh;
 }
 
-/* =============================================
-   HEADER
-   ============================================= */
+/* En-tête principal */
 header {
-  background-color: var(--color-header-bg);
-  color: var(--color-header-text);
-  padding: 1.5rem 2rem;
   text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #8b6914;
+  /* Effet de brillance dorée */
+  background: linear-gradient(180deg, #1c1408 0%, transparent 100%);
+  padding: 2rem;
+  border-radius: 4px;
 }
 
 header h1 {
-  font-size: 2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 2.8rem;
+  color: #d4aa47;
+  text-shadow:
+          0 0 20px rgba(212, 170, 71, 0.5),
+          0 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #8b6914;
+  margin-top: 0.5rem;
+  letter-spacing: 2px;
+}
+
+/* Barre d'outils : recherche + bouton tri côte à côte */
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+#search {
+  padding: 8px 12px;
+  border: 1px solid #5a4010;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Crimson Text', serif;
+  flex: 1;
+  max-width: 400px;
+  background-color: #1a1408;
+  color: #c8b882;
+}
+
+#search::placeholder {
+  color: #5a4a2a;
+}
+
+#search:focus {
+  outline: none;
+  border-color: #d4aa47;
+  box-shadow: 0 0 8px rgba(212, 170, 71, 0.3);
+}
+
+/* ===== Boutons — pattern DRY =====
+   Toutes les propriétés communes ici, les variantes n'ajoutent que la couleur. */
+.btn {
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  color: #0d0d0d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Bouton primaire — actions positives */
+.btn-primary {
+  background-color: #d4aa47;
+}
+.btn-primary:hover {
+  background-color: #e8c060;
+  box-shadow: 0 0 12px rgba(212, 170, 71, 0.5);
+}
+.btn-primary:active {
+  background-color: #b8922f;
+}
+
+/* Bouton danger — actions destructives */
+.btn-danger {
+  background-color: #8b1a1a;
+  color: #f0d090;
+}
+.btn-danger:hover {
+  background-color: #a52020;
+  box-shadow: 0 0 8px rgba(139, 26, 26, 0.5);
+}
+
+/* Grille de cartes */
+#list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* Carte d'armée */
+.card {
+  border: 1px solid #3a2a0a;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #141008;
+  /* Liseré doré en haut */
+  border-top: 3px solid #8b6914;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+          0 8px 24px rgba(0, 0, 0, 0.6),
+          0 0 16px rgba(212, 170, 71, 0.15);
+  border-top-color: #d4aa47;
+}
+
+.card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  /* Dégradé en bas de l'image pour la lisibilité */
+  display: block;
+}
+
+/* Conteneur texte de la carte */
+.card-body {
+  padding: 1rem;
+}
+
+.card-body h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: #d4aa47;
+  margin-bottom: 0.3rem;
   letter-spacing: 1px;
 }
 
-/* =============================================
-   NAV — compteur de résultats
-   ============================================= */
-nav {
-  background-color: var(--color-primary);
-  color: #fff;
-  padding: 0.5rem 2rem;
-  font-size: 0.9rem;
+.card-body p {
+  font-style: italic;
+  color: #8b7040;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
 }
 
-/* =============================================
-   MAIN
-   ============================================= */
-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Badge de puissance */
+.rating {
+  display: inline-block;
+  padding: 2px 10px;
+  background-color: #2a1a04;
+  border: 1px solid #8b6914;
+  color: #d4aa47;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
 }
 
-/* =============================================
-   FORMULAIRE D'AJOUT
-   ============================================= */
-form#form-add {
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+.rating::before {
+  content: "⚡ Puissance : ";
+}
+
+/* Formulaire */
+form {
+  margin: 0 0 2rem 0;
+  background-color: #110e06;
+  border: 1px solid #3a2a0a;
+  border-top: 3px solid #8b6914;
+  border-radius: 4px;
   padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow);
+  max-width: 500px;
 }
 
-form#form-add h2 {
-  margin-bottom: 1rem;
+form h2 {
+  font-family: 'Cinzel', serif;
+  color: #d4aa47;
   font-size: 1.2rem;
-  color: var(--color-text);
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .form-group {
@@ -101,237 +251,39 @@ form#form-add h2 {
 }
 
 .form-group label {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  color: #8b6914;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
+/* Champs du formulaire */
 .form-group input,
 .form-group select {
-  padding: 8px 12px;
-  border: 1px solid var(--color-border);
+  padding: 8px;
+  border: 1px solid #3a2a0a;
   border-radius: 4px;
   font-size: 1rem;
-  background-color: #fff;
+  font-family: 'Crimson Text', serif;
+  background-color: #1a1408;
+  color: #c8b882;
+}
+
+.form-group select option {
+  background-color: #1a1408;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+  border-color: #d4aa47;
+  box-shadow: 0 0 8px rgba(212, 170, 71, 0.25);
 }
 
-form#form-add button[type="submit"] {
-  padding: 10px 20px;
-  background-color: var(--color-primary);
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-form#form-add button[type="submit"]:hover {
-  background-color: var(--color-primary-dark);
-}
-
-/* =============================================
-   BARRE D'OUTILS (recherche + filtre + tri)
-   ============================================= */
-.toolbar {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-#search {
-  padding: 8px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  font-size: 1rem;
-  flex: 1;
-  min-width: 200px;
-}
-
-#search:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
-}
-
-#filter-category,
-#sort-select {
-  padding: 8px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  font-size: 0.95rem;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-#filter-category:focus,
-#sort-select:focus {
-  outline: none;
-  border-color: var(--color-primary);
-}
-
-/* =============================================
-   FEEDBACK MESSAGE
-   ============================================= */
-.feedback {
-  background-color: var(--color-feedback-bg);
-  color: var(--color-feedback-text);
-  border: 1px solid #c3e6cb;
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-}
-
-.feedback.hidden {
-  display: none;
-}
-
-/* =============================================
-   GRILLE DES CARTES
-   ============================================= */
-#list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  list-style: none;
-  padding: 0;
-}
-
-/* =============================================
-   CARTE INDIVIDUELLE
-   ============================================= */
-.card {
-  background-color: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
-
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 1rem;
-}
-
-.card-body h2 {
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
-}
-
-.card-body p {
-  font-size: 0.85rem;
-  color: var(--color-text-light);
-  margin-bottom: 0.5rem;
-}
-
-/* Badge note */
-.rating {
-  display: inline-block;
-  background-color: var(--color-rating-bg);
-  color: var(--color-rating-text);
-  font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-}
-
-/* Bouton supprimer */
+/* Bouton supprimer dans une carte — uniquement le positionnement */
 .btn-delete {
+  margin-top: 8px;
   display: block;
   width: 100%;
-  margin-top: 8px;
-  padding: 6px 12px;
-  background-color: var(--color-danger);
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: background-color 0.2s;
-}
-
-.btn-delete:hover {
-  background-color: var(--color-danger-dark);
-}
-
-/* =============================================
-   FOOTER
-   ============================================= */
-footer {
-  background-color: var(--color-footer-bg);
-  color: var(--color-footer-text);
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.85rem;
-  margin-top: 3rem;
-}
-
-/* =============================================
-   RESPONSIVE — tablette (max 768px)
-   ============================================= */
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 1.5rem;
-  }
-
-  main {
-    padding: 1rem;
-  }
-
-  .toolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  #search,
-  #filter-category,
-  #sort-select {
-    width: 100%;
-  }
-
-  #list {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-  }
-}
-
-/* =============================================
-   RESPONSIVE — mobile (max 480px)
-   ============================================= */
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.2rem;
-  }
-
-  #list {
-    grid-template-columns: 1fr;
-  }
-
-  form#form-add {
-    padding: 1rem;
-  }
-
-  .card img {
-    height: 140px;
-  }
 }
