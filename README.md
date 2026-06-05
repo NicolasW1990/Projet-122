@@ -26,7 +26,7 @@ https://nicolasw1990.github.io/Projet-122/
 
 ## Captures d'écran
 
-
+"Img/capture d'écran site.png"
 
 ## Transparence IA
 - Je me suis grandement inspiré de l'IA au point de Commit mon WORKTREES claude afin de voir la structure que celui-ci peut avoir
