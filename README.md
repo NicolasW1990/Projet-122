@@ -11,7 +11,7 @@ Chaque armée possède un nom, une faction, une puissance de guerre (1–10), un
 
 ## Lien GitHub Pages
 
-[Colle ici le lien de ton site en ligne]
+https://nicolasw1990.github.io/Projet-122/
 
 ## Fonctionnalités
 
