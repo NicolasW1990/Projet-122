@@ -25,7 +25,7 @@ let data = [
     category: "Space Marines",
     puissance: 9.2,
     fondation: 1987,
-    image: "img/ultramarine.png"
+    image: "img/ultramarine.webp"
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ let data = [
     category: "Space Marines",
     puissance: 8.9,
     fondation: 1987,
-    image: "img/Imperial-Fists.jpg"
+    image: "img/Imperial-Fists.webp"
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ let data = [
     category: "Space Marines",
     puissance: 9.0,
     fondation: 1990,
-    image: "img/Blood-Angels.jpg"
+    image: "img/Blood-Angels.webp"
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ let data = [
     category: "Space Marines",
     puissance: 8.7,
     fondation: 1991,
-    image: "img/space_wolf.jpg"
+    image: "img/space_wolf.webp"
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ let data = [
     category: "Garde Impériale",
     puissance: 7.8,
     fondation: 1993,
-    image: "img/Cadia.jpg"
+    image: "img/Cadia.webp"
   },
   {
     id: 6,
@@ -65,7 +65,7 @@ let data = [
     category: "Garde Impériale",
     puissance: 7.5,
     fondation: 1993,
-    image: "img/catachan.jpg"
+    image: "img/catachan.webp"
   },
   {
     id: 7,
@@ -73,7 +73,7 @@ let data = [
     category: "Adepta Sororitas",
     puissance: 8.5,
     fondation: 1997,
-    image: "img/adeptas_sororitas.jpg"
+    image: "img/adeptas_sororitas.webp"
   },
   {
     id: 8,
@@ -81,7 +81,7 @@ let data = [
     category: "Adeptus Custodes",
     puissance: 9.5,
     fondation: 2017,
-    image: "img/Custodes.jpg"
+    image: "img/Custodes.webp"
   },
   {
     id: 9,
@@ -97,7 +97,7 @@ let data = [
     category: "Chevaliers Impériaux",
     puissance: 9.3,
     fondation: 2014,
-    image: "img/Imperial-Knights.jpg"
+    image: "img/Imperial-Knights.webp"
   },
   {
     id: 11,
@@ -113,7 +113,7 @@ let data = [
     category: "Space Marines",
     puissance: 9.1,
     fondation: 1992,
-    image: "img/grey knight.jpg"
+    image: "img/grey knight.webp"
   }
 ];
 
