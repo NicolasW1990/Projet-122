@@ -1,32 +1,67 @@
 /* =============================================
    VARIABLES CSS — couleurs et espacements
+   =============================================
+   Les variables CSS (--nom-variable) permettent de définir une couleur
+   une seule fois ici, et de la réutiliser partout dans le fichier.
+   Si on veut changer une couleur, on ne modifie qu'une seule ligne.
+   On les déclare dans :root pour qu'elles soient accessibles partout.
+*/
+
+/* =============================================
+   Import de la police gothique depuis Google Fonts
+   L'@import doit être la TOUTE PREMIÈRE règle du fichier CSS,
+   avant même les variables. S'il y a quoi que ce soit avant,
+   le navigateur ignore l'import et utilise la police par défaut.
    ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
 :root {
-  --color-primary: #0078d4;
-  --color-primary-dark: #005fa3;
-  --color-danger: #e74c3c;
-  --color-danger-dark: #c0392b;
-  --color-bg: #f4f6f9;
-  --color-card-bg: #ffffff;
-  --color-border: #ddd;
-  --color-text: #2c3e50;
-  --color-text-light: #666;
-  --color-header-bg: #1a1a2e;
-  --color-header-text: #ffffff;
-  --color-footer-bg: #1a1a2e;
-  --color-footer-text: #aaaaaa;
-  --color-rating-bg: #f39c12;
-  --color-rating-text: #ffffff;
-  --color-feedback-bg: #d4edda;
-  --color-feedback-text: #155724;
-  --radius: 8px;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Couleurs dorées — thème impérial */
+  --color-gold:        #d4aa47;
+  --color-gold-dark:   #8b6914;
+  --color-gold-light:  #e8c060;
+
+  /* Couleurs de fond — du plus sombre au plus clair */
+  --color-bg-page:     #0d0d0d;
+  --color-bg-header:   #1c1408;
+  --color-bg-card:     #141008;
+  --color-bg-form:     #110e06;
+  --color-bg-input:    #1a1408;
+
+  /* Couleurs de texte */
+  --color-text-main:   #c8b882;
+  --color-text-muted:  #8b7040;
+
+  /* Couleurs des boutons de suppression */
+  --color-danger:      #8b1a1a;
+  --color-danger-hover:#a52020;
+  --color-danger-text: #f0d090;
+
+  /* Bordures */
+  --color-border:      #3a2a0a;
+
+  /* Autres */
+  --radius: 4px;
 }
 
-/*/* Styles du projet — Armées de l'Impérium (Warhammer 40 000) */
-
-/* Import de la police gothique depuis Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+/* =============================================
+   Classe utilitaire pour cacher visuellement un élément
+   SANS le cacher aux lecteurs d'écran.
+   On l'utilise sur le label du champ de recherche :
+   on veut qu'il existe pour l'accessibilité, mais sans
+   qu'il apparaisse dans le design.
+   ============================================= */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* Sélecteur universel : supprime marges/paddings par défaut, active box-sizing */
 * {
@@ -38,31 +73,27 @@
 /* Corps de la page — thème sombre impérial */
 body {
   font-family: 'Crimson Text', Georgia, serif;
-  background-color: #0d0d0d;
-  color: #c8b882;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-main);
   padding: 2rem;
-  /* Texture de fond subtile */
-  background-image:
-          radial-gradient(ellipse at top, #1a1208 0%, #0d0d0d 60%);
+  background-image: radial-gradient(ellipse at top, #1a1208 0%, #0d0d0d 60%);
   min-height: 100vh;
 }
 
 /* En-tête principal */
 header {
   text-align: center;
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid #8b6914;
-  /* Effet de brillance dorée */
-  background: linear-gradient(180deg, #1c1408 0%, transparent 100%);
+  background: linear-gradient(180deg, var(--color-bg-header) 0%, transparent 100%);
   padding: 2rem;
-  border-radius: 4px;
+  border-bottom: 2px solid var(--color-gold-dark);
+  border-radius: var(--radius);
+  margin-bottom: 2.5rem;
 }
 
 header h1 {
   font-family: 'Cinzel', serif;
   font-size: 2.8rem;
-  color: #d4aa47;
+  color: var(--color-gold);
   text-shadow:
           0 0 20px rgba(212, 170, 71, 0.5),
           0 2px 4px rgba(0, 0, 0, 0.8);
@@ -74,9 +105,30 @@ header h1 {
   font-family: 'Crimson Text', serif;
   font-style: italic;
   font-size: 1.1rem;
-  color: #8b6914;
+  color: var(--color-gold-dark);
   margin-top: 0.5rem;
   letter-spacing: 2px;
+}
+
+/* Lien de navigation dans le header */
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  color: var(--color-gold-dark);
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-gold-dark);
+  padding-bottom: 1px;
+  transition: color 0.15s ease;
+}
+
+nav a:hover {
+  color: var(--color-gold);
 }
 
 /* Barre d'outils : recherche + bouton tri côte à côte */
@@ -89,14 +141,14 @@ header h1 {
 
 #search {
   padding: 8px 12px;
-  border: 1px solid #5a4010;
-  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
   font-size: 1rem;
   font-family: 'Crimson Text', serif;
   flex: 1;
   max-width: 400px;
-  background-color: #1a1408;
-  color: #c8b882;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-main);
 }
 
 #search::placeholder {
@@ -105,12 +157,13 @@ header h1 {
 
 #search:focus {
   outline: none;
-  border-color: #d4aa47;
+  border-color: var(--color-gold);
   box-shadow: 0 0 8px rgba(212, 170, 71, 0.3);
 }
 
 /* ===== Boutons — pattern DRY =====
-   Toutes les propriétés communes ici, les variantes n'ajoutent que la couleur. */
+   Toutes les propriétés communes ici, les variantes n'ajoutent que la couleur.
+*/
 .btn {
   padding: 8px 16px;
   font-size: 0.95rem;
@@ -118,7 +171,7 @@ header h1 {
   font-family: 'Cinzel', serif;
   color: #0d0d0d;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius);
   cursor: pointer;
   white-space: nowrap;
   letter-spacing: 1px;
@@ -128,10 +181,10 @@ header h1 {
 
 /* Bouton primaire — actions positives */
 .btn-primary {
-  background-color: #d4aa47;
+  background-color: var(--color-gold);
 }
 .btn-primary:hover {
-  background-color: #e8c060;
+  background-color: var(--color-gold-light);
   box-shadow: 0 0 12px rgba(212, 170, 71, 0.5);
 }
 .btn-primary:active {
@@ -140,11 +193,11 @@ header h1 {
 
 /* Bouton danger — actions destructives */
 .btn-danger {
-  background-color: #8b1a1a;
-  color: #f0d090;
+  background-color: var(--color-danger);
+  color: var(--color-danger-text);
 }
 .btn-danger:hover {
-  background-color: #a52020;
+  background-color: var(--color-danger-hover);
   box-shadow: 0 0 8px rgba(139, 26, 26, 0.5);
 }
 
@@ -159,13 +212,12 @@ header h1 {
 
 /* Carte d'armée */
 .card {
-  border: 1px solid #3a2a0a;
-  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
-  background-color: #141008;
-  /* Liseré doré en haut */
-  border-top: 3px solid #8b6914;
+  background-color: var(--color-bg-card);
+  border-top: 3px solid var(--color-gold-dark);
 }
 
 .card:hover {
@@ -173,14 +225,13 @@ header h1 {
   box-shadow:
           0 8px 24px rgba(0, 0, 0, 0.6),
           0 0 16px rgba(212, 170, 71, 0.15);
-  border-top-color: #d4aa47;
+  border-top-color: var(--color-gold);
 }
 
 .card img {
   width: 100%;
   height: 400px;
   object-fit: cover;
-  /* Dégradé en bas de l'image pour la lisibilité */
   display: block;
 }
 
@@ -192,14 +243,14 @@ header h1 {
 .card-body h2 {
   font-family: 'Cinzel', serif;
   font-size: 1.1rem;
-  color: #d4aa47;
+  color: var(--color-gold);
   margin-bottom: 0.3rem;
   letter-spacing: 1px;
 }
 
 .card-body p {
   font-style: italic;
-  color: #8b7040;
+  color: var(--color-text-muted);
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
 }
@@ -209,8 +260,8 @@ header h1 {
   display: inline-block;
   padding: 2px 10px;
   background-color: #2a1a04;
-  border: 1px solid #8b6914;
-  color: #d4aa47;
+  border: 1px solid var(--color-gold-dark);
+  color: var(--color-gold);
   font-family: 'Cinzel', serif;
   font-size: 0.85rem;
   border-radius: 3px;
@@ -226,17 +277,17 @@ header h1 {
 /* Formulaire */
 form {
   margin: 0 0 2rem 0;
-  background-color: #110e06;
-  border: 1px solid #3a2a0a;
-  border-top: 3px solid #8b6914;
-  border-radius: 4px;
+  background-color: var(--color-bg-form);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-gold-dark);
+  border-radius: var(--radius);
   padding: 1.5rem;
   max-width: 500px;
 }
 
 form h2 {
   font-family: 'Cinzel', serif;
-  color: #d4aa47;
+  color: var(--color-gold);
   font-size: 1.2rem;
   margin-bottom: 1rem;
   letter-spacing: 2px;
@@ -253,7 +304,7 @@ form h2 {
 .form-group label {
   font-family: 'Cinzel', serif;
   font-size: 0.8rem;
-  color: #8b6914;
+  color: var(--color-gold-dark);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -262,22 +313,22 @@ form h2 {
 .form-group input,
 .form-group select {
   padding: 8px;
-  border: 1px solid #3a2a0a;
-  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
   font-size: 1rem;
   font-family: 'Crimson Text', serif;
-  background-color: #1a1408;
-  color: #c8b882;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-main);
 }
 
 .form-group select option {
-  background-color: #1a1408;
+  background-color: var(--color-bg-input);
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #d4aa47;
+  border-color: var(--color-gold);
   box-shadow: 0 0 8px rgba(212, 170, 71, 0.25);
 }
 
@@ -286,4 +337,111 @@ form h2 {
   margin-top: 8px;
   display: block;
   width: 100%;
+}
+
+/* =============================================
+   RESPONSIVE — Media Queries
+   Une media query permet d'appliquer des styles différents
+   selon la taille de l'écran. On utilise "max-width" pour cibler
+   les écrans plus petits que la valeur donnée.
+
+   Règle simple :
+     @media (max-width: 768px)  → tablette et téléphone
+     @media (max-width: 480px)  → téléphone uniquement
+   ============================================= */
+
+/* --- Tablette : écrans jusqu'à 768px de large --- */
+@media (max-width: 768px) {
+
+  /* On réduit le padding général de la page */
+  body {
+    padding: 1rem;
+  }
+
+  /* Le titre devient plus petit pour tenir sur une tablette */
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+
+  /* Le formulaire prend toute la largeur disponible */
+  form {
+    max-width: 100%;
+  }
+
+  /* La barre d'outils se met en colonne au lieu d'être côte à côte */
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Le champ de recherche prend toute la largeur */
+  #search {
+    max-width: 100%;
+  }
+
+  /* La grille passe à 2 colonnes maximum */
+  #list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* --- Téléphone : écrans jusqu'à 480px de large --- */
+@media (max-width: 480px) {
+
+  /* Titre encore plus compact sur petit écran */
+  header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* Une seule colonne sur téléphone — les cartes s'empilent */
+  #list {
+    grid-template-columns: 1fr;
+  }
+
+  /* Les images des cartes sont moins hautes sur petit écran */
+  .card img {
+    height: 200px;
+  }
+}
+/* =============================================
+   TOAST — message de feedback temporaire
+   Apparaît en bas à droite après un ajout ou une modification.
+   position: fixed le détache du flux pour qu'il flotte au-dessus.
+   opacity + transform permettent l'animation d'entrée/sortie.
+   ============================================= */
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--color-gold-dark);
+  color: #0d0d0d;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-gold);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 100;
+}
+
+#toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mode édition : le formulaire change de couleur de bordure */
+form.editing {
+  border-top-color: var(--color-gold);
+  box-shadow: 0 0 12px rgba(212, 170, 71, 0.15);
 }

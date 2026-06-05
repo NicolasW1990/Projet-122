@@ -7,14 +7,30 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <header>
   <h1>⚙️ Armées de l'Impérium</h1>
   <p class="subtitle">Warhammer 40 000 — Pour l'Empereur !</p>
+
+  <!--
+    La balise <nav> sert à regrouper les liens de navigation principaux du site.
+    Les navigateurs et les lecteurs d'écran la reconnaissent comme zone de navigation.
+    Même si on n'a qu'un seul lien ici, c'est une bonne habitude de l'utiliser
+    dès qu'on propose un lien vers une autre section de la page.
+  -->
+  <nav>
+    <a href="#form-add">Ajouter une armée</a>
+  </nav>
 </header>
 
 <main>
+  <!--
+    Le formulaire sert à la fois pour AJOUTER et MODIFIER une armée.
+    En mode modification, le titre et le bouton changent, et un bouton
+    "Annuler" apparaît pour revenir au mode ajout sans rien sauvegarder.
+  -->
   <form id="form-add">
-    <h2>Ajouter une armée</h2>
+    <h2 id="form-title">Ajouter une armée</h2>
 
     <div class="form-group">
       <label for="input-name">Nom</label>
@@ -35,26 +51,60 @@
 
     <div class="form-group">
       <label for="input-rating">Puissance de guerre (1–10)</label>
-      <input type="number" id="input-rating" min="1" max="10" placeholder="8">
+      <input type="number" id="input-rating" min="1" max="10" placeholder="8" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <div class="form-buttons">
+      <button type="submit" id="btn-submit" class="btn btn-primary">Ajouter</button>
+      <!--
+        Le bouton Annuler est caché par défaut (style="display:none").
+        Il apparaît uniquement en mode modification pour permettre
+        de revenir au mode ajout sans sauvegarder les changements.
+        type="button" est important : sans ça, il soumettrait le formulaire.
+      -->
+      <button type="button" id="btn-cancel" class="btn btn-danger" style="display:none;">Annuler</button>
+    </div>
   </form>
 
   <div class="toolbar">
-    <label for="search"></label><input type="text" id="search" placeholder="Rechercher une armée...">
+    <!--
+      Le label doit TOUJOURS avoir un texte visible (ou au minimum un aria-label).
+      Sans texte, les lecteurs d'écran ne savent pas à quoi sert ce champ.
+      J'ai ajouté "Rechercher" comme texte du label, et je le cache visuellement
+      avec la classe "sr-only" pour ne pas casser le design.
+      Le champ placeholder est utile, mais ne remplace pas un vrai label.
+    -->
+    <label for="search" class="sr-only">Rechercher</label>
+    <input type="text" id="search" placeholder="Rechercher une armée...">
+
+    <!--
+      Select de filtrage par catégorie (bonus +1 pt).
+      La première option "Toutes les factions" a une valeur vide "",
+      ce qui signifie "pas de filtre actif".
+      En JavaScript, on vérifie si la valeur est "" pour afficher tout.
+    -->
+    <label for="filter-category" class="sr-only">Filtrer par faction</label>
+    <select id="filter-category">
+      <option value="">Toutes les factions</option>
+      <option value="Space Marines">Space Marines</option>
+      <option value="Garde Impériale">Garde Impériale</option>
+      <option value="Adeptus Mechanicus">Adeptus Mechanicus</option>
+      <option value="Adepta Sororitas">Adepta Sororitas</option>
+      <option value="Chevaliers Impériaux">Chevaliers Impériaux</option>
+      <option value="Adeptus Custodes">Adeptus Custodes</option>
+    </select>
+
     <button id="btn-sort" class="btn btn-primary">Trier par puissance ↓ (DESC)</button>
   </div>
 
-  <ul id="list"></ul>
+  <div id="list"></div>
 </main>
-
-
-
 
 <footer>
   <p>Projet C122 — JavaScript — ESIG 2025-2026</p>
 </footer>
+
+<div id="toast" aria-live="polite"></div>
 
 <script src="js/script.js"></script>
 </body>
