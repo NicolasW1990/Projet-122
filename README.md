@@ -30,6 +30,7 @@ https://nicolasw1990.github.io/Projet-122/
 
 ## Transparence IA
 - Je me suis grandement inspiré de l'IA au point de Commit mon WORKTREES claude afin de voir la structure que celui-ci peut avoir
+- 
 ### Outils utilisés
 
 - Claude (Anthropic) — utilisé pour générer et corriger le CSS responsive (media queries),
@@ -55,3 +56,6 @@ Le code JavaScript contient volontairement un grand nombre de commentaires déta
 Ce choix est personnel : les commentaires m'ont servi d'outil de compréhension et de rappel tout au long
 du développement, pour m'approprier chaque concept (closures, délégation d'événements,
 manipulation du DOM, etc.) et pouvoir me y référer facilement.
+### Performance
+
+https://gtmetrix.com/reports/nicolasw1990.github.io/eVb6p1Yg/
